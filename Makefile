@@ -8,6 +8,14 @@ clean:
 	find . -name '*.o' -delete
 	find . -name 'bin' -delete
 
+check: all
+	swap_pair_simple/bin
+	swap_pair_ref/bin
+	inspect_value/bin
+	string_builder/bin
+	function_callaround/bin
+	red_blue_tags/bin
+
 
 swap_pair_simple/bin: swap_pair_simple/main.ml swap_pair_simple/swap_pair_simple.c
 	ocamlopt -o swap_pair_simple/bin swap_pair_simple/main.ml swap_pair_simple/swap_pair_simple.c
