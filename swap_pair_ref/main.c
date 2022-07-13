@@ -4,12 +4,14 @@
 value caml_swap_pair_ref(value p)
 {
   CAMLparam1 (p);
-  CAMLlocal2 (deref, tmp);
-  printf("Ocaml p     Value tag %hhx size %ld ptr 0x%lx\n", Tag_val(p), Wosize_val(p), p);
+  CAMLlocal4 (result, deref, fst, snd);
+  result = caml_alloc (2, 0);
   deref = Field(p, 0);
-  printf("Ocaml deref Value tag %hhx size %ld ptr 0x%lx\n", Tag_val(deref), Wosize_val(deref), p);
-  tmp = Field(deref, 0);
-  caml_modify(&Field(deref, 0), Field(deref, 1));
-  caml_modify(&Field(deref, 1), tmp);
+  fst = Field(deref, 0);
+  snd = Field(deref, 1);
+
+  caml_modify(&Field(result, 0), snd);
+  caml_modify(&Field(result, 1), fst);
+  caml_modify(&Field(p, 0), result);
   CAMLreturn (Val_unit);
 }
