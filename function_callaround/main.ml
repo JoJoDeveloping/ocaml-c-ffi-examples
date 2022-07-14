@@ -1,3 +1,3 @@
-external callme : (unit -> string) -> unit = "caml_callme"
+external callme : int ref -> (unit -> unit) -> unit = "caml_callme"
 
-let () = callme (fun () -> "Hello, World!")
+let () = let r = ref 0 in callme r (fun () -> r := 42)

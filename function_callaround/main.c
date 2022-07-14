@@ -25,11 +25,11 @@ value caml_string_print(value p)
 /**
  * Correctness: p is a function of type unit -> string
 */
-value caml_callme(value p)
+value caml_callme(value ref, value p)
 {
-  CAMLparam1 (p);
-  CAMLlocal1 (res);
-  res = caml_callback(p, Val_unit);
-  caml_string_print(res);
+  CAMLparam2 (ref, p);
+  printf("Before: %ld\n", Long_val(Field(ref, 0)));
+  caml_callback(p, Val_unit);
+  printf("After: %ld\n", Long_val(Field(ref, 0)));
   CAMLreturn (Val_unit);
 }

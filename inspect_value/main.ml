@@ -15,4 +15,5 @@ let () = let k1 = ref EmptyRef in let k2 = ref (RecRef k1) in k1 := RecRef k2;
                   print_info 42;
                   print_info (ref 42);
                   print_info (Box 42);
-                  print_info (Cons (1, (Cons (2, (Cons (42, Nil))))))
+                  print_info (Cons (1, (Cons (2, (Cons (42, Nil))))));
+                  print_info (ref 42)

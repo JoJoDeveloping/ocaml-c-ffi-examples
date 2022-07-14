@@ -11,18 +11,18 @@ int i = 0;
 value caml_make_red(value unit) {
   CAMLparam1 (unit);
   CAMLlocal1 (res);
-  res = caml_alloc(1, Abstract_tag);
+  res = caml_alloc(1, 0);
   i++;
-  Store_field(res, 0, i);
+  Store_field(res, 0, Val_long(i));
   CAMLreturn(res);
 }
 
 value caml_make_blue(value unit) {
   CAMLparam1 (unit);
   CAMLlocal1 (res);
-  res = caml_alloc(1, Abstract_tag);
+  res = caml_alloc(1, 0);
   i++;
-  Store_field(res, 0, i);
+  Store_field(res, 0, Val_long(i));
   CAMLreturn(res);
 }
 
@@ -32,8 +32,8 @@ value caml_make_blue(value unit) {
  */
 value caml_check_red_blue(value red, value blue) {
   CAMLparam2 (red, blue);
-  int red_v = Field(red, 0);
-  int blue_v = Field(blue, 0);
+  int red_v = Long_val(Field(red, 0));
+  int blue_v = Long_val(Field(blue, 0));
   assert(red_v != blue_v);
   if (red_v != blue_v) {
     CAMLreturn(Val_true);
